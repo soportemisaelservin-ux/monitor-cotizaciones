@@ -1,6 +1,5 @@
 streamlit
 pandas
 openpyxl
-pyodbc
-# Driver oficial de Microsoft para Linux (Streamlit Cloud usa Ubuntu)
-ODBC Driver 18 for SQL Server
+pyodbc==5.1.0
+
