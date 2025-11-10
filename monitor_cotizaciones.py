@@ -21,7 +21,7 @@ def conectar_sql(server, database, user, password):
     conn_str = (
         f'DRIVER={{ODBC Driver 17 for SQL Server}};'
         f'SERVER={server};DATABASE={database};UID={user};PWD={password};'
-        f'TrustServerCertificate=yes;'
+        f'Encryption=yes;TrustServerCertificate=yes;'
     )
     try:
         return pyodbc.connect(conn_str)
@@ -218,3 +218,4 @@ except Exception as e:
     print(f"ERROR: {e}")
 
     sys.exit(1)
+
