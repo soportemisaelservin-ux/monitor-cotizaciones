@@ -3,6 +3,16 @@ import pyodbc
 import pandas as pd
 import sys
 import os
+# === FIX PARA STREAMLIT CLOUD - DRIVER SQL SERVER ===
+import os
+if os.environ.get('STREAMLIT') == 'cloud':
+    # Forza la instalación del driver en Linux
+    os.system("apt-get update && apt-get install -y unixodbc-dev")
+    os.system("curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -")
+    os.system("curl https://packages.microsoft.com/config/ubuntu/22.04/prod.list > /etc/apt/sources.list.d/mssql-release.list")
+    os.system("apt-get update")
+    os.system("ACCEPT_EULA=Y apt-get install -y msodbcsql18")
+# =====================================================
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_FILE = os.path.join(BASE_DIR, "monitor_cotizaciones.xlsx")
@@ -206,4 +216,5 @@ try:
     print(f"CREAL BAJO: ${df_bajo['Venta_Total'].sum():,.0f}")
 except Exception as e:
     print(f"ERROR: {e}")
+
     sys.exit(1)
